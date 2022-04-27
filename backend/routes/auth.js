@@ -52,7 +52,7 @@ router.post('/createuser', [
         //             res.json({ error: `please enter unique email`, message: err.message })
         //     });
         // console.log(authtoken);
-        res.json({authtoken})
+        res.json({ authtoken })
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ errors: "some erroe occured" });
@@ -74,22 +74,22 @@ router.post('/login', [
         }
 
         //user not exist
-        let user = await User.findOne({email});
+        let user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ errors: "user not exist" })
         }
         const passwordcompare = await bcrypt.compare(password, user.password);
-        if(!passwordcompare){
-            return   res.status(400).json({ errors: "login credentials are invalid" });
+        if (!passwordcompare) {
+            return res.status(400).json({ errors: "login credentials are invalid" });
         }
-        const payload={
-            user:{
-                id:user.id
+        const payload = {
+            user: {
+                id: user.id
             }
         }
 
-        const authtoken =jwt.sign(payload,JWT_SECRET)
-        res.json({authtoken})
+        const authtoken = jwt.sign(payload, JWT_SECRET)
+        res.json({ authtoken })
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ errors: "some error occured" });
@@ -99,17 +99,17 @@ router.post('/login', [
 
 
 //ROUTE 3 : GETUSER
-router.post('/getuser',fetchuser ,async(req, res)=>{
-    try{
+router.post('/getuser', fetchuser, async (req, res) => {
+    try {
         userId = req.user.id;
         const user = await User.findById(userId).select("-password");
         res.send(user);
 
-    }catch (error) {
+    } catch (error) {
         console.log(error.message);
         res.status(500).json({ errors: "some error occured" });
 
     }
 })
- 
+
 module.exports = router
