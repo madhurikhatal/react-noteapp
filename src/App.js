@@ -1,22 +1,25 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
+import NoteState from './context/NoteState';
 
 function App() {
   return (
     <>
-      {/* <Navbar /> */}
+      <NoteState >
       <BrowserRouter>
+        <Navbar />
         <Routes>
-          <Navbar />
-          <Route index element={<Home/>}/>
-          <Route index element={<About/>}/>
+
+          <Route index path='/' element={<Home />} />
+          <Route index path='/about' element={<About />} />
         </Routes>
 
       </BrowserRouter>
+      </NoteState>
     </>
   );
 }
