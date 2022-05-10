@@ -2,8 +2,12 @@ const connectToMongo = require('./db')  //import db from backend
 const express = require('express')
 connectToMongo();
 
+var cors= require('cors')
+
 const app = express()
 const port = 4000
+
+app.use(cors)
 
 app.get('/', (req, res) => {
     res.send('hello world')

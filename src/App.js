@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
 import NoteState from './context/NoteState';
+import Alert from './components/Alert';
 
 function App() {
   return (
@@ -12,11 +13,12 @@ function App() {
       <NoteState >
       <BrowserRouter>
         <Navbar />
-        <div className='container my-5'>
+        <Alert message="welcome to app"/>
+        <div className='container my-3'>
         <Routes>
 
-          <Route index path='/' element={<Home />} />
-          <Route index path='/about' element={<About />} />
+          <Route exact path='/' element={<Home />} />
+          <Route exact path='/about' element={<About />} />
         </Routes>
         </div>
       </BrowserRouter>
